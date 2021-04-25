@@ -1,0 +1,454 @@
+/* https://codepen.io/sosuke/pen/Pjoqqp */
+/*======= global =======*/
+
+:root {
+    --dark-blue: #0F2027;
+    --light-blue: #203A43;
+    --light-yellow: #ffc107;
+    --dark-orange: #ff6207;
+    --light-green: #198754;
+    --light-red: #dc3545;
+    --light-blue2: #0d6efd;
+    --transition: all ease 0.3s;
+}
+
+@font-face {
+    font-family: 'Staat';
+    src: url('fonts/Staatliches-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Quick';
+    src: url('fonts/Quicksand-VariableFont_wght.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quick', sans-serif;
+    overflow: hidden;
+    text-decoration: none;
+    user-select: none;
+    outline: none;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--light-yellow);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: inset 0 0 6px rgb(0, 0, 0, .3);
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: var(--light-yellow);
+}
+
+/*======= nav =======*/
+.nav {
+    background: var(--dark-blue);
+    width: 100%;
+    height: 50px;
+    color: #fff;
+    padding: 0;
+    display: flex;
+    border-bottom: solid 2px #fff;
+    /*esse atributo permite a movimentação da janela do app quando o frame é false*/
+    -webkit-app-region: drag;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    padding: 10px 25px;
+}
+
+.nav-logo img {
+    height: 100%;
+    margin-right: 5px;
+}
+
+.nav-logo span {
+    font-family: 'Staat', cursive;
+    font-size: 1.3rem;
+    transition: var(--transition);
+    -webkit-app-region: no-drag;
+}
+
+.nav-logo span:hover {
+    color: var(--light-yellow);
+}
+
+.nav-flex-end {
+    display: flex;
+    justify-content: flex-end;
+    margin:  0 0 0 auto;
+    padding: 0;
+}
+
+.nav-flex-end span {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+    /* no-drag para desfazer o que foi feito no nav com drag */
+    -webkit-app-region: no-drag;
+}
+
+.nav-flex-end span:hover {
+    background: var(--light-blue);
+    cursor: pointer;
+}
+
+.nav-flex-end span img {
+    padding: 0 5px;
+    height: 50%;
+}
+
+/*======= notes =======*/
+#notes {
+    background: var(--dark-blue);
+    width: 290px;
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+    float: left;
+}
+
+#notes #new-note {
+    color: #fff;
+    display: block;
+    margin: 15px auto 0;
+    text-align: center;
+    transition: var(--transition);
+    font-size: 1.2rem;
+}
+
+#notes #new-note:hover {
+    color: var(--light-yellow);
+}
+
+#notes #order-notes {
+    font-size: 1rem;
+    display: block;
+    margin: 8px auto 0;
+    width: 150px;
+    background-color: var(--dark-blue);
+    color: #fff;
+    padding: 4px 10px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-color: #fff;
+    cursor: pointer;
+}
+
+#notes #order-notes option {
+    background: var(--light-blue);
+}
+
+#notes-list {
+    padding: 10px 15px;
+}
+
+.notes-content {
+    background: var(--light-blue);
+    margin: 8px 0;
+    padding: 8px 10px;
+    border-radius: 5px;
+    border-left: 4px solid var(--light-yellow);
+    transition: var(--transition);
+}
+
+.notes-content .flex {
+    float: left;
+}
+
+.notes-content span {
+    display: block;
+}
+
+.notes-datetime {
+    color: var(--light-yellow);
+    font-size: 1rem;
+    margin-top: 4px;
+}
+
+.notes-content:hover {
+    margin-left: -4px;
+}
+
+.notes-title {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+/* ESTILO DA PRIORIDADE DA NOTA - START */
+#high-priority {
+    color: #fff;
+    background-color: var(--light-red);
+}
+
+#medium-priority {
+    color: #fff;
+    background-color: var(--light-yellow);
+}
+#low-priority {
+    color: #fff;
+    background-color: var(--light-green);
+}
+
+.priority {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+    padding: 4px 10px;
+    border-radius: 5px;
+}
+
+.priority img {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.priority span {
+    font-size: 1rem;
+}
+/* ESTILO DA PRIORIDADE DA NOTA - END */
+
+.notes-content .options {
+    float: right;
+}
+
+.notes-content .options img {
+    width: 25px;
+    cursor: pointer;
+}
+
+.notes-content .options img:first-child:hover {
+    filter: invert(76%) sepia(87%) saturate(1183%) hue-rotate(86deg) brightness(100%) contrast(102%);
+}
+
+.notes-content .options img:last-child:hover {
+    filter: invert(14%) sepia(92%) saturate(5772%) hue-rotate(358deg) brightness(92%) contrast(118%);
+}
+
+/*======= edit-notes-message =======*/
+#edit-notes-message {
+    height: calc(100vh - 50px);
+    background: var(--light-blue);
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#edit-notes-message span:first-child {
+    color: var(--dark-blue);
+    font-size: 1.8rem;
+    border-bottom: dashed 2px var(--dark-blue);
+    transition: var(--transition);
+}
+
+#edit-notes-message span:hover:first-child {
+    color: var(--light-yellow);
+    border-color: #fff;
+}
+
+#edit-notes-message span:last-child {
+    color: var(--dark-blue);
+    font-size: 1.3rem;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+/*======= edit-notes =======*/
+#edit-notes {
+    height: 100vh;
+    background: var(--light-blue);
+    padding: 20px 30px;
+}
+
+#edit-notes header {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#edit-notes header #about-note #edit-title {
+    width: 220px;
+    height: 30px;
+    background: var(--light-blue);
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 2px var(--dark-blue);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 400;
+    transition: var(--transition);
+}
+
+#edit-notes header #about-note #edit-title:focus {
+    border-color: #fff;
+}
+
+#edit-notes header #about-note span {
+    display: block;
+    margin: 5px 0 0;
+    color: var(--light-yellow);
+    font-size: 1.1rem;
+}
+
+#edit-notes header #about-note #radio-area {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+}
+
+#edit-notes header #about-note #radio-area input {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#edit-notes header #about-note #radio-area label {
+    margin-left: 3px;
+    color: #fff;
+    cursor: pointer;
+}
+
+#edit-notes header #btn-options .btn {
+    margin: 0 0 0 8px;
+    padding: 5px 10px;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: var(--transition);
+    cursor: pointer;
+    color: #fff;
+    font-size: .9rem;
+}
+
+#edit-notes header #btn-options .btn:hover {
+    opacity: 0.8;
+}
+
+#edit-notes header #btn-options .btn:first-child {
+    background: var(--light-red);
+}
+
+#edit-notes header #btn-options .btn:last-child {
+    background: var(--light-green);
+}
+
+#edit-notes #edit-content {
+    width: 100%;
+    height: calc(100% - 180px);
+    outline: none;
+    background: #d1d1d1;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    resize: none;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+/*======= modal =======*/
+.modal-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+    padding: 0;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: var(--dark-blue);
+    padding: 20px;
+    color: #fff;
+    width: 100%;
+    height: 300px;
+    max-width: 500px;
+    max-height: 500px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.modal-img {
+    max-width: 180px;
+    max-height: 180px;
+    position: relative;
+}
+
+.modal-img img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+}
+
+.modal span {
+    margin: 10px 0 15px;
+}
+
+.modal a {
+    margin: 0;
+    padding: 5px 10px;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: var(--transition);
+    cursor: pointer;
+    color: #fff;
+    background: var(--light-red);
+    width: 100px;
+}
+
+.modal a:hover {
+    opacity: 0.8;
+}
+
+/*======= @media =======*/
+@media (max-width: 768px) {
+    #edit-notes #edit-title{
+        width: 100%;
+        float: inherit;
+    }
+
+    #edit-notes #btn-options {
+        padding: 15px 0 0 0;
+    }
+
+    #edit-notes #btn-options .btn {
+        width: 100%;
+        margin: 0 5px;
+    }
+}
