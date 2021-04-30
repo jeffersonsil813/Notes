@@ -113,7 +113,7 @@
 /*======= notes =======*/
 #notes {
     background: var(--dark-blue);
-    width: 290px;
+    width: 295px;
     height: calc(100vh - 50px);
     overflow-y: auto;
     float: left;

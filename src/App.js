@@ -54,7 +54,7 @@ const Main = {
                     
                     <div id="radio-area">
                         <span>Prioridade:</span>
-                        <input tabindex="-1" id="low" checked="true" name="radio" value="Baixa" type="radio" /> <label for="low">Baixa</label>
+                        <input tabindex="-1" id="low" name="radio" value="Baixa" type="radio" /> <label for="low">Baixa</label>
 
                         <input tabindex="-1" id="medium" name="radio" value="Média" type="radio" /> <label for="medium">Média</label>
 
@@ -80,6 +80,17 @@ const Main = {
         divEditNotes.innerHTML = Main.innerHTMLInputNote(index)
 
         Main.main.appendChild(divEditNotes)
+
+        if(index != null) {
+            if(Notes.all[index].priority=="Baixa") {
+                document.querySelector("#radio-area #low").checked = true
+            } else if(Notes.all[index].priority=="Média") {
+                document.querySelector("#radio-area #medium").checked = true
+            } else if(Notes.all[index].priority=="Alta") {
+                document.querySelector("#radio-area #high").checked = true
+            }
+        }
+        
     }
 }
 
