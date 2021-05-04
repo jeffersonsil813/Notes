@@ -16,7 +16,7 @@ document.querySelector(".modal a").addEventListener("click", function(event){
 // ======= DATETIME ======= \\
 function dateTime() {
     const date = new Date()
-    const day = String(date.getDate().length) == 1? ('0' + date.getDate()) : date.getDate()
+    const day = String(date.getDate()).length == 1? ('0' + date.getDate()) : date.getDate()
     // +1 pq 0=janeiro
     const month = (String(date.getMonth()+1)).length == 1? ('0' + (date.getMonth()+1)) : date.getMonth()+1
     // fullyear (4 dígitos) - year (2 dígitos)
