@@ -1,6 +1,6 @@
 {
   "name": "notes",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Aplicativo de notas para desktop criado com Electron JS",
   "main": "electron/main.js",
   "scripts": {

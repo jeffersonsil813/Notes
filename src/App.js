@@ -34,14 +34,14 @@ const Main = {
         Main.main.innerHTML = ""
         const divEditMessageHtml = document.createElement('div')
         divEditMessageHtml.setAttribute('id', 'edit-notes-message')
-        const span = document.createElement('span')
-        span.innerHTML = 'Adicione uma nota ou edite'
+        const github = document.createElement('a')
+        github.innerHTML = `
+        <img src="assets/notes/github.png" alt="github-icon" /> Jefferson Santos
+        `
+        github.setAttribute('onmouseover', 'this.children[0].src = "assets/notes/github2.png"')
+        github.setAttribute('onmouseout', 'this.children[0].src = "assets/notes/github.png"')
 
-        const by = document.createElement('span')
-        by.innerHTML = 'by: Jefferson Santos'
-
-        divEditMessageHtml.appendChild(span)
-        divEditMessageHtml.appendChild(by)
+        divEditMessageHtml.appendChild(github)
         Main.main.appendChild(divEditMessageHtml)
     },
 
@@ -63,8 +63,8 @@ const Main = {
                 </div>
 
                 <div id="btn-options">
-                    <button tabindex="-1" class="btn" onclick="Main.editMessage()">Cancelar</button>
-                    <button tabindex="-1" class="btn" onclick="Form.save(${index})">Salvar</button>
+                    <button tabindex="-1" class="btn" title="Cancelar" onclick="Main.editMessage()">Cancelar</button>
+                    <button tabindex="-1" class="btn" title="Salvar" onclick="Form.save(${index})">Salvar</button>
                 </div>
             </header>
 
@@ -210,14 +210,14 @@ const DOM = {
             <div class="flex">
                 <span class="notes-title" title="${note.title}">${note.title.substring(0,15)}</span>
                 <span class="notes-datetime">${note.datetime}</span>
-                <div class="priority" id="${(note.priority == "Baixa"? 'low-priority': (note.priority == "Média"? 'medium-priority': (note.priority == "Alta"? 'high-priority': '') ) )}">
+                <div title="Prioridade ${note.priority.toLowerCase()}" class="priority" id="${(note.priority == "Baixa"? 'low-priority': (note.priority == "Média"? 'medium-priority': (note.priority == "Alta"? 'high-priority': '') ) )}">
                     <img src="./assets/notes/alert.png" alt="alerta" />
                     <span>${note.priority}</span>
                 </div>
             </div>
             <div class="options">
-                <img src="./assets/notes/edit.png" alt="editar nota" onclick="Notes.edit(${index})" />
-                <img src="./assets/notes/trash.png" alt="excluir nota" onclick="Notes.remove(${index})" />
+                <img src="./assets/notes/edit.png" alt="editar nota" title="Editar/ver nota" onclick="Notes.edit(${index})" />
+                <img src="./assets/notes/trash.png" alt="excluir nota" title="Excluir nota" onclick="Notes.remove(${index})" />
             </div>
         `
         return html

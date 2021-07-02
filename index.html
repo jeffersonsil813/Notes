@@ -16,7 +16,7 @@
       </div>
 
       <div class="nav-flex-end">
-        <span onclick="App.minimize()">
+        <span title="Minimizar" onclick="App.minimize()">
           <img
             src="./assets/nav/minimize.png"
             alt="minimizar"
@@ -24,7 +24,7 @@
           />
         </span>
 
-        <span onclick="App.maximize()">
+        <span title="Maximizar" onclick="App.maximize()">
           <img
             src="./assets/nav/restore.png"
             alt="restaurar"
@@ -32,14 +32,14 @@
           />
         </span>
 
-        <span onclick="App.quit()">
+        <span title="Fechar" onclick="App.quit()">
           <img src="./assets/nav/close.png" alt="fechar" id="close-icon" />
         </span>
       </div>
     </div>
 
     <div id="notes">
-      <a href="#" id="new-note" onclick="Main.inputNote()">+ Nova Nota</a>
+      <a href="#" id="new-note" title="Nova nota" onclick="Main.inputNote()">+ Nova Nota</a>
 
       <select name="order-notes" id="order-notes" onchange="Notes.orderNotes()">
         <option selected value="Todas">Todas</option>
@@ -59,7 +59,7 @@
           <img src="./assets/notes/warning.png" alt="dados incompletos" />
         </div>
         <span></span>
-        <a href="#" onclick="modal()" class="close">Sair</a>
+        <a href="#" onclick="modal()" title="Sair" class="close">Sair</a>
       </div>
     </div>
 
