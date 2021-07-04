@@ -8,6 +8,7 @@
     --light-green: #198754;
     --light-red: #dc3545;
     --color-text: #f1f1f1;
+    --background-color: #d1d1d1;
     --transition: all ease 0.3s;
 }
 
@@ -174,7 +175,7 @@
     display: block;
 }
 
-.notes-datetime {
+.notes-date {
     color: var(--light-yellow);
     font-size: 1rem;
     margin-top: 4px;
@@ -193,15 +194,18 @@
 #high-priority {
     color: var(--color-text);
     background-color: var(--light-red);
+    width: 140px;
 }
 
 #medium-priority {
     color: var(--color-text);
     background-color: var(--light-yellow);
+    width: 140px;
 }
 #low-priority {
     color: var(--color-text);
     background-color: var(--light-green);
+    width: 140px;
 }
 
 .priority {
@@ -282,6 +286,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 #edit-notes header #about-note #edit-title {
@@ -308,6 +313,20 @@
     margin: 5px 0 0;
     color: var(--light-yellow);
     font-size: 1.1rem;
+}
+
+#edit-notes header #about-note #date {
+    margin: 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#edit-notes header #about-note #date input {
+    padding: 4px;
+    border: none;
+    border-radius: 2px;
+    outline: none;
 }
 
 #edit-notes header #about-note #radio-area {
@@ -357,7 +376,7 @@
     width: 100%;
     height: calc(100% - 180px);
     outline: none;
-    background: #d1d1d1;
+    background: var(--background-color);
     border: none;
     padding: 10px;
     font-size: 1rem;

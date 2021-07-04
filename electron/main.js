@@ -1,4 +1,5 @@
 const { app, ipcMain, BrowserWindow } = require("electron")
+const open = require('open')
 const path = require("path")
 
 let win
@@ -31,6 +32,10 @@ ipcMain.on("maximize", () => {
 
 ipcMain.on("quit", () => {
   app.quit()
+})
+
+ipcMain.on("acessGithub", async () => {
+  await open('https://github.com/jeffersonsil813')
 })
 
 app.whenReady().then(App.createWindow)

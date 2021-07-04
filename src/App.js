@@ -18,18 +18,14 @@ function onChangeInput() {
 document.querySelector('#btn-options').children[1].classList.remove('disable')
 }
 
-// ======= DATETIME ======= \\
-function dateTime() {
-    const date = new Date()
-    const day = String(date.getDate()).length == 1? ('0' + date.getDate()) : date.getDate()
-    // +1 pq 0=janeiro
-    const month = (String(date.getMonth()+1)).length == 1? ('0' + (date.getMonth()+1)) : date.getMonth()+1
-    // fullyear (4 dígitos) - year (2 dígitos)
-    const year = date.getFullYear()
-    const hour = String(date.getHours()).length == 1? ('0' + date.getHours()) : date.getHours()
-    const min = String(date.getMinutes()).length == 1? ('0' + date.getMinutes()) : date.getMinutes()
+// ======= FORMAT DATE ======= \\
+function formatDate(date) {
+    return date.substring(8) + '/' + date.substring(5, 7) + '/' + date.substring(0, 4)
+}
 
-    return day + '/' + month + '/' + year + ' - ' + hour + ':' + min + 'H'
+// ======= FORMAT DATE ======= \\
+function acessGithub() {
+    window.api.send('acessGithub')
 }
 
 // ======= ONLOAD MAIN APPEND ======= \\
@@ -44,8 +40,7 @@ const Main = {
         <img src="assets/notes/github.png" alt="github-icon" /> Jefferson Santos
         `
         github.setAttribute('title', 'Github')
-        // github.setAttribute('href', 'https://github.com/jeffersonsil813')
-        github.setAttribute('id', 'acessGithub')
+        github.setAttribute('onclick', 'acessGithub()')
         github.setAttribute('onmouseover', 'this.children[0].src = "assets/notes/github2.png"')
         github.setAttribute('onmouseout', 'this.children[0].src = "assets/notes/github.png"')
 
@@ -54,11 +49,24 @@ const Main = {
     },
 
     innerHTMLInputNote(index) {
+        let aux
+        if(index === null || index === undefined) {
+            // false -> criando nova nota
+            aux = false
+        } else {
+            // true -> editando nota
+            aux = true
+        }
+
         const html = `
             <header>
                 <div id="about-note">
-                    <input type="text" onkeydown="onChangeInput()" onpaste="onChangeInput()" oninput="onChangeInput()" minlength="5" autocomplete="off" value="${index == null? '' : Notes.all[index].title}" placeholder="Título" maxlength="30" id="edit-title"/>
-                    <span tabindex="-1">${index == null? '' : Notes.all[index].datetime}</span>
+                    <input type="text" onkeydown="onChangeInput()" onpaste="onChangeInput()" oninput="onChangeInput()" minlength="5" autocomplete="off" value="${aux === false? '' : Notes.all[index].title}" placeholder="Título" maxlength="30" id="edit-title"/>
+                    
+                    <div id="date">
+                        <span>Data Término:</span>
+                        <input onchange="onChangeInput()" value="${aux === false? '' : Notes.all[index].date}" type="date" tabindex="-1" />
+                    </div>
                     
                     <div id="radio-area">
                         <span>Prioridade:</span>
@@ -76,7 +84,7 @@ const Main = {
                 </div>
             </header>
 
-            <textarea tabindex="0" name="edit-content" minlength="10" onkeydown="onChangeInput()" onpaste="onChangeInput()" oninput="onChangeInput()" id="edit-content" placeholder="Digite suas anotações">${index == null? '' : Notes.all[index].content}</textarea>
+            <textarea tabindex="0" name="edit-content" minlength="10" onkeydown="onChangeInput()" onpaste="onChangeInput()" oninput="onChangeInput()" id="edit-content" placeholder="Digite suas anotações">${aux === false? '' : Notes.all[index].content}</textarea>
         `
         return html
     },
@@ -121,7 +129,7 @@ const Form = {
             title: document.querySelector('input#edit-title').value != ''? 
             (document.querySelector('input#edit-title').value[0].toUpperCase() + document.querySelector('input#edit-title').value.substring(1)).trim()
             : '',
-            datetime: dateTime(),
+            date: document.querySelector('#date input').value,
             content: document.querySelector('textarea#edit-content').value,
             priority: Form.searchRadio()
         }
@@ -144,16 +152,16 @@ const Form = {
     },
 
     validateFields() {
-        const {title, datetime, content, priority} = Form.getValues()
-        if(title === "" || datetime === "" || content === "") {
-            throw new Error("Por favor, preencha todos os campos!")
-        } else if(title.length < 5) {
+        const {title, date, content, priority} = Form.getValues()
+        if(title.length < 5) {
             throw new Error('O campo título deve conter ao menos 5 caracteres!')
-        } else if(content.length < 10) {
-            throw new Error('O campo de anotações deve conter ao menos 10 caracteres!')
+        } else if(date === null || date === undefined || date === "") {
+            throw new Error('Por favor, selecione uma data de término!')
         } else if(priority === '') {
             throw new Error('Por favor, selecione um nível de prioridade!')
-        }
+        } else if(content.length < 10) {
+            throw new Error('O campo de anotações deve conter ao menos 10 caracteres!')
+        } 
     },
     
     clearFields() {
@@ -227,7 +235,7 @@ const DOM = {
         const html = `
             <div class="flex">
                 <span class="notes-title" title="${note.title}">${note.title.substring(0,15)}</span>
-                <span class="notes-datetime">${note.datetime}</span>
+                <span class="notes-date" title="Data término: ${formatDate(note.date)}">${formatDate(note.date)}</span>
                 <div title="Prioridade ${note.priority.toLowerCase()}" class="priority" id="${(note.priority == "Baixa"? 'low-priority': (note.priority == "Média"? 'medium-priority': (note.priority == "Alta"? 'high-priority': '') ) )}">
                     <img src="./assets/notes/alert.png" alt="alerta" />
                     <span>${note.priority}</span>
