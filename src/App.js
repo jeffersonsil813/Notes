@@ -5,17 +5,17 @@ function modal(error) {
 }
 
 // ======= PREVENT DEFAULT ======= \\
-document.querySelector("#new-note").addEventListener("click", function(event){
+document.querySelector("#new-note").addEventListener("click", function (event) {
     event.preventDefault()
 })
 
-document.querySelector(".modal a").addEventListener("click", function(event){
+document.querySelector(".modal a").addEventListener("click", function (event) {
     event.preventDefault()
 })
 
 // ======= ON CHANGE INPUTS ======= \\
 function onChangeInput() {
-document.querySelector('#btn-options').children[1].classList.remove('disable')
+    document.querySelector('#btn-options').children[1].classList.remove('disable')
 }
 
 // ======= FORMAT DATE ======= \\
@@ -23,7 +23,16 @@ function formatDate(date) {
     return date.substring(8) + '/' + date.substring(5, 7) + '/' + date.substring(0, 4)
 }
 
-// ======= FORMAT DATE ======= \\
+// ======= MIN DATE ======= \\
+function minDate() {
+    let today = new Date(),
+        year = today.getFullYear(),
+        month = (today.getMonth() + 1).toString().padStart(2, '0'),
+        day = today.getDate().toString().padStart(2, '0')
+    return `${year}-${month}-${day}`
+}
+
+// ======= ACESS GITHUB ======= \\
 function acessGithub() {
     window.api.send('acessGithub')
 }
@@ -50,41 +59,40 @@ const Main = {
 
     innerHTMLInputNote(index) {
         let aux
-        if(index === null || index === undefined) {
+        if (index === null || index === undefined) {
             // false -> criando nova nota
             aux = false
         } else {
             // true -> editando nota
             aux = true
         }
-
         const html = `
             <header>
                 <div id="about-note">
-                    <input type="text" onkeydown="onChangeInput()" onpaste="onChangeInput()" oninput="onChangeInput()" minlength="5" autocomplete="off" value="${aux === false? '' : Notes.all[index].title}" placeholder="Título" maxlength="30" id="edit-title"/>
+                    <input type="text" onkeydown="onChangeInput()" onpaste="onChangeInput()" oninput="onChangeInput()" minlength="5" autocomplete="off" value="${aux === false ? '' : Notes.all[index].title}" placeholder="Título" maxlength="30" id="edit-title"/>
                     
                     <div id="date">
                         <span>Data Término:</span>
-                        <input onchange="onChangeInput()" value="${aux === false? '' : Notes.all[index].date}" type="date" tabindex="-1" />
+                        <input min="${minDate()}" onchange="onChangeInput()" value="${aux === false ? '' : Notes.all[index].date}" type="date" />
                     </div>
                     
                     <div id="radio-area">
                         <span>Prioridade:</span>
-                        <input tabindex="-1" id="low" name="radio" onchange="onChangeInput()" value="Baixa" type="radio" /> <label for="low">Baixa</label>
+                        <input id="low" name="radio" onchange="onChangeInput()" value="Baixa" type="radio" /> <label for="low">Baixa</label>
 
-                        <input tabindex="-1" id="medium" name="radio" onchange="onChangeInput()" value="Média" type="radio" /> <label for="medium">Média</label>
+                        <input id="medium" name="radio" onchange="onChangeInput()" value="Média" type="radio" /> <label for="medium">Média</label>
 
-                        <input tabindex="-1" id="high" name="radio" onchange="onChangeInput()" value="Alta" type="radio" /> <label for="high">Alta</label>
+                        <input id="high" name="radio" onchange="onChangeInput()" value="Alta" type="radio" /> <label for="high">Alta</label>
                     </div>
                 </div>
 
                 <div id="btn-options">
-                    <button tabindex="-1" class="btn" title="Cancelar" onclick="Main.editMessage()">Cancelar</button>
-                    <button tabindex="-1" class="btn disable" title="Salvar" onclick="Form.save(${index})">Salvar</button>
+                    <button class="btn" title="Cancelar" onclick="Main.editMessage()">Cancelar</button>
+                    <button class="btn disable" title="Salvar" onclick="Form.save(${index})">Salvar</button>
                 </div>
             </header>
 
-            <textarea tabindex="0" name="edit-content" minlength="10" onkeydown="onChangeInput()" onpaste="onChangeInput()" oninput="onChangeInput()" id="edit-content" placeholder="Digite suas anotações">${aux === false? '' : Notes.all[index].content}</textarea>
+            <textarea name="edit-content" minlength="10" onkeydown="onChangeInput()" onpaste="onChangeInput()" oninput="onChangeInput()" id="edit-content" placeholder="Digite suas anotações">${aux === false ? '' : Notes.all[index].content}</textarea>
         `
         return html
     },
@@ -97,16 +105,16 @@ const Main = {
 
         Main.main.appendChild(divEditNotes)
 
-        if(index != null) {
-            if(Notes.all[index].priority=="Baixa") {
+        if (index != null) {
+            if (Notes.all[index].priority == "Baixa") {
                 document.querySelector("#radio-area #low").checked = true
-            } else if(Notes.all[index].priority=="Média") {
+            } else if (Notes.all[index].priority == "Média") {
                 document.querySelector("#radio-area #medium").checked = true
-            } else if(Notes.all[index].priority=="Alta") {
+            } else if (Notes.all[index].priority == "Alta") {
                 document.querySelector("#radio-area #high").checked = true
             }
         }
-        
+
     }
 }
 
@@ -126,9 +134,9 @@ const Storage = {
 const Form = {
     getValues() {
         return {
-            title: document.querySelector('input#edit-title').value != ''? 
-            (document.querySelector('input#edit-title').value[0].toUpperCase() + document.querySelector('input#edit-title').value.substring(1)).trim()
-            : '',
+            title: document.querySelector('input#edit-title').value != '' ?
+                (document.querySelector('input#edit-title').value[0].toUpperCase() + document.querySelector('input#edit-title').value.substring(1)).trim()
+                : '',
             date: document.querySelector('#date input').value,
             content: document.querySelector('textarea#edit-content').value,
             priority: Form.searchRadio()
@@ -140,11 +148,11 @@ const Form = {
         const medium = document.querySelector('input[type="radio"]:checked')
         const high = document.querySelector('input[type="radio"]:checked')
 
-        if(low != null && low.value == "Baixa") {
-           return document.querySelector('#low').value
-        } else if(medium != null && medium.value == "Média") {
+        if (low != null && low.value == "Baixa") {
+            return document.querySelector('#low').value
+        } else if (medium != null && medium.value == "Média") {
             return document.querySelector('#medium').value
-        } else if(high != null && high.value == "Alta") {
+        } else if (high != null && high.value == "Alta") {
             return document.querySelector('#high').value
         }
 
@@ -152,18 +160,18 @@ const Form = {
     },
 
     validateFields() {
-        const {title, date, content, priority} = Form.getValues()
-        if(title.length < 5) {
+        const { title, date, content, priority } = Form.getValues()
+        if (title.length < 5) {
             throw new Error('O campo título deve conter ao menos 5 caracteres!')
-        } else if(date === null || date === undefined || date === "") {
+        } else if (date === null || date === undefined || date === "") {
             throw new Error('Por favor, selecione uma data de término!')
-        } else if(priority === '') {
+        } else if (priority === '') {
             throw new Error('Por favor, selecione um nível de prioridade!')
-        } else if(content.length < 10) {
+        } else if (content.length < 10) {
             throw new Error('O campo de anotações deve conter ao menos 10 caracteres!')
-        } 
+        }
     },
-    
+
     clearFields() {
         document.querySelector('input#edit-title').value = ''
         document.querySelector('textarea#edit-content').value = ''
@@ -185,15 +193,15 @@ const Notes = {
 
     add(index, note) {
         // index != null -> estou editando uma nota
-        if(index != null) {
+        if (index != null) {
             // remove uma nota do array/banco de acordo com o index
             Notes.all.splice(index, 1)
             Notes.all.unshift(note)
         } else {
             // else -> adicionando nova nota
-            const {title} = Form.getValues()
-            for(e of Notes.all) {
-                if(title.toLowerCase() === e.title.toLowerCase()) {
+            const { title } = Form.getValues()
+            for (let e of Notes.all) {
+                if (title.toLowerCase() === e.title.toLowerCase()) {
                     throw new Error('Já existe uma nota com esse título! Por favor, faça uma alteração.')
                 }
             }
@@ -216,6 +224,39 @@ const Notes = {
 
     orderNotes() {
         App.init(document.querySelector("#order-notes").value)
+    },
+
+    notify() {
+        if (Notes.all.length !== 0) {
+            let notes = Notes.all.filter((obj) => {
+                return obj.date.length > 0
+            })
+
+            function nextDate(a, b) {
+                return Number(a.date.replace(/-/g, "")) - Number(b.date.replace(/-/g, ""))
+            }
+            notes.sort(nextDate)
+
+            function setNotification(element) {
+                if (window.Notification && Notification.permission !== "denied") {
+                    Notification.requestPermission(() => {
+                        let newNotification = new Notification(element.title, {
+                            body: "Término: " + formatDate(element.date) + `\nPrioridade: ${element.priority}`,
+                            icon: "assets/logo/png/64x64.png"
+                        })
+                    })
+                }
+            }
+
+            let aux = 0
+            setInterval(() => {
+                if (aux < notes.length) {
+                    setNotification(notes[aux++])
+                } else {
+                    clearInterval()
+                }
+            }, 3600000)
+        }
     }
 }
 
@@ -234,9 +275,9 @@ const DOM = {
     innerHTMLNote(note, index) {
         const html = `
             <div class="flex">
-                <span class="notes-title" title="${note.title}">${note.title.substring(0,15)}</span>
+                <span class="notes-title" title="${note.title}">${note.title.substring(0, 15)}</span>
                 <span class="notes-date" title="Data término: ${formatDate(note.date)}">${formatDate(note.date)}</span>
-                <div title="Prioridade ${note.priority.toLowerCase()}" class="priority" id="${(note.priority == "Baixa"? 'low-priority': (note.priority == "Média"? 'medium-priority': (note.priority == "Alta"? 'high-priority': '') ) )}">
+                <div title="Prioridade ${note.priority.toLowerCase()}" class="priority" id="${(note.priority == "Baixa" ? 'low-priority' : (note.priority == "Média" ? 'medium-priority' : (note.priority == "Alta" ? 'high-priority' : '')))}">
                     <img src="./assets/notes/alert.png" alt="alerta" />
                     <span>${note.priority}</span>
                 </div>
@@ -271,11 +312,11 @@ const App = {
         // Poderia fazer assim
         // Notes.all.forEach(DOM.addNote)
 
-        switch(value) {
+        switch (value) {
             case "Baixa":
                 DOM.clearNotes()
                 Notes.all.forEach((note, index) => {
-                    if(value === "Baixa" && value === note.priority) {
+                    if (value === "Baixa" && value === note.priority) {
                         DOM.addNote(note, index)
                     }
                 })
@@ -283,7 +324,7 @@ const App = {
             case "Média":
                 DOM.clearNotes()
                 Notes.all.forEach((note, index) => {
-                    if(value === "Média" && value === note.priority) {
+                    if (value === "Média" && value === note.priority) {
                         DOM.addNote(note, index)
                     }
                 })
@@ -291,7 +332,7 @@ const App = {
             case "Alta":
                 DOM.clearNotes()
                 Notes.all.forEach((note, index) => {
-                    if(value === "Alta" && value === note.priority) {
+                    if (value === "Alta" && value === note.priority) {
                         DOM.addNote(note, index)
                     }
                 })
@@ -305,9 +346,12 @@ const App = {
         }
 
         Storage.set(Notes.all)
+        setTimeout(() => Notes.notify(), 10000)
+        clearTimeout()
     },
 
     reload() {
+        clearInterval()
         DOM.clearNotes()
         App.init(document.querySelector("#order-notes").value)
     }
