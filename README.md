@@ -30,7 +30,7 @@
 - Html5
 - Css3
   
-<h3 id="install"> <img src="assets/github/computador-desktop.png"/> Install </h3>
+<h3 id="install"> <img src="assets/github/computador-desktop.png" width="32px"/> Install </h3>
 
 1. clone the repository using `git clone`
 2. Enter the folder project
