@@ -15,9 +15,9 @@
 </p>
 
 <div align="center">
-    <img src="assets/github/app1.png" width="600px">
-    <img src="assets/github/app2.png" width="600px">
-    <img src="assets/github/app3.png" width="600px">
+    <img src="assets/github/app1.png">
+    <img src="assets/github/app2.png">
+    <img src="assets/github/app3.png">
 </div>
 
 <h3 id="introduction"> 🏁 Introduction</h3>
