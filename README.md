@@ -1,5 +1,6 @@
 <h1 align="center">
-    <img src="assets/logo/png/64x64.png"> <span>Notes</span>
+    <img src="assets/logo/png/64x64.png">
+    Notes
 </h1>
 
 <h6 align="center">
