@@ -1,6 +1,8 @@
-<h1 align="center" display="flex">
-    <img src="assets/logo/png/64x64.png"> Notes
-</h1>
+<div align="center">
+    <h1 style="display: flex;">
+        <img src="assets/logo/png/64x64.png"> Notes
+    </h1>
+</div>
 
 <h6 align="center">
 &#8987; One step at a time
@@ -21,7 +23,7 @@
 </div>
 
 <h3 id="introduction"> 🏁 Introduction</h3>
-<p>Notes is an application for desktop to use everyday for write down your tasks</p>
+<p>Notes is an application for desktop to use everyday for write down your tasks.</p>
 
 <h3 id="tecnologies">  🚀 Tecnologies</h3>
 
