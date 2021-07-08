@@ -1,7 +1,5 @@
-<div align="center">
-    <h1 style="display: flex;">
-        <img src="assets/logo/png/64x64.png"> Notes
-    </h1>
+<div align="center" style="display: flex;">
+    <img src="assets/logo/png/64x64.png"> <h1>Notes</h1>
 </div>
 
 <h6 align="center">
