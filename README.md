@@ -1,6 +1,5 @@
-<body style="scroll-behavior: smooth">
 <h1 align="center">
-    <img src="assets/log/png/64x64.png"> Notes
+    <img src="assets/logo/png/64x64.png"> Notes
 </h1>
 
 <h6 align="center">
@@ -11,6 +10,7 @@
     <a href="#introduction">Introduction</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     <a href="#tecnologies">Tecnologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     <a href="#install">Install</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="">Download .exe</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     <a href="#license">License</a>
 </p>
 
@@ -20,7 +20,7 @@
     <img src="assets/github/app3.png">
 </div>
 
-<h3 id="introduction"> 🏁 Introduction </h3>
+<h3 id="introduction"> 🏁 Introduction</h3>
 <p>Notes is an application for desktop to use everyday for write down your tasks</p>
 
 <h3 id="tecnologies">  🚀 Tecnologies</h3>
@@ -30,7 +30,7 @@
 - Html5
 - Css3
   
-<h3 id="install"> <img src="assets/github/computador-desktop.png" width="32px"/> Install </h3>
+<h3 id="install"> &#128187; Install</h3>
 
 1. clone the repository using `git clone`
 2. Enter the folder project
@@ -40,7 +40,7 @@
 
 <h3 id="license"> 🔒 License </h3>
 
-This project is under MIT license. See the [LICENSE](LICENSE.md) file for more details.
+This project is under MIT license. See the [LICENSE](LICENSE) file for more details.
 
 <br>
 
@@ -58,4 +58,3 @@ This project is under MIT license. See the [LICENSE](LICENSE.md) file for more d
         <img src="assets/github/instagram.png"/>
     </a>
 </h6>
-</body>
