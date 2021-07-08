@@ -1,6 +1,5 @@
 <h1 align="center">
-    <img src="assets/logo/png/64x64.png">
-    Notes
+    <img src="assets/github/logo.png">
 </h1>
 
 <h6 align="center">
