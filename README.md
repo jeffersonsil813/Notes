@@ -1,6 +1,6 @@
-<div align="center" style="display: flex; align-items: center; justify-content: center;">
-    <img src="assets/logo/png/64x64.png"> <h1>Notes</h1>
-</div>
+<h1 style="display: flex; align-items: center; justify-content: center;">
+    <img src="assets/logo/png/64x64.png"> Notes
+</h1>
 
 <h6 align="center">
 &#8987; One step at a time
