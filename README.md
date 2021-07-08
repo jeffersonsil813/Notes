@@ -1,4 +1,4 @@
-<h1 align="center">
+<h1 align="center" style="display: flex; align-items: center; justify-content: center;">
     <img src="assets/logo/png/64x64.png"> Notes
 </h1>
 
@@ -32,7 +32,7 @@
   
 <h3 id="install"> &#128187; Install</h3>
 
-1. clone the repository using `git clone`
+1. Clone the repository using `git clone`
 2. Enter the folder project
 3. Install packages using `npm i` 
 4. Run `npm start`
