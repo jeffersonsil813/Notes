@@ -1,4 +1,4 @@
-<h1 style="display: flex; align-items: center; justify-content: center;">
+<h1 align="center">
     <img src="assets/logo/png/64x64.png"> Notes
 </h1>
 
